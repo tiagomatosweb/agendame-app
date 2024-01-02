@@ -58,18 +58,15 @@ const submit = handleSubmit(async (values) => {
 const { value: email } = useField('email')
 const { value: password } = useField('password')
 
-axios.defaults.withCredentials = true;
-axios.defaults.withXSRFToken = true;
-
 const feedbackMessage = ref('')
 
 const router = useRouter()
 function login(values) {
   feedbackMessage.value = ''
 
-  axios.get('http://localhost:8000/sanctum/csrf-cookie')
+  axios.get('sanctum/csrf-cookie')
     .then(() => {
-      axios.post('http://localhost:8000/api/login', {
+      axios.post('api/login', {
         email: values.email,
         password: values.password
       })
