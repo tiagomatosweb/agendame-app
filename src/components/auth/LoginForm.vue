@@ -29,7 +29,7 @@
         </div>
       </v-col>
       <v-col cols="12" class="pt-0">
-        <v-btn type="submit" :loading="loading" color="primary" size="large" block flat>Entrar</v-btn>
+        <v-btn type="submit" :loading="isSubmitting" color="primary" size="large" block flat>Entrar</v-btn>
       </v-col>
     </v-row>
   </v-form>
@@ -38,27 +38,21 @@
 <script setup>
 import axios from 'axios'
 import {ref} from 'vue';
-import { useForm, useField } from "vee-validate";
+import { useRouter } from 'vue-router';
+import { useForm, useField } from 'vee-validate';
+import { object, string } from 'yup';
 
-const schema = {
-  email(value) {
-    if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true
+const schema = object({
+  email: string().required().email().label('E-mail'),
+  password: string().required().label('Senha')
+})
 
-    return 'Must be a valid e-mail.'
-  },
-  password(value) {
-    if (value) return true
-
-    return 'Password is required.'
-  },
-}
-
-const { handleSubmit, errors } = useForm({
+const { handleSubmit, errors, isSubmitting } = useForm({
   validationSchema: schema
 })
 
-const submit = handleSubmit((values) => {
-  console.log(values)
+const submit = handleSubmit(async (values) => {
+  await login(values)
 })
 
 const { value: email } = useField('email')
@@ -68,21 +62,22 @@ axios.defaults.withCredentials = true;
 axios.defaults.withXSRFToken = true;
 
 const feedbackMessage = ref('')
-const loading = ref(false)
 
-function login() {
-  loading.value = true
+const router = useRouter()
+function login(values) {
   feedbackMessage.value = ''
 
   axios.get('http://localhost:8000/sanctum/csrf-cookie')
     .then(() => {
       axios.post('http://localhost:8000/api/login', {
-        email: email.value,
-        password: password.value
-      }).catch(() => {
+        email: values.email,
+        password: values.password
+      })
+        .then(() => {
+          router.push({ name: 'dashboard' })
+        })
+        .catch(() => {
         feedbackMessage.value = 'Seu e-mail ou senha estão inválidos.'
-      }).finally(() => {
-        loading.value = false
       })
     })
 }

@@ -3,7 +3,7 @@ export default {
     component: () => import('@/layouts/full/FullLayout.vue'),
     children: [
         {
-            name: 'Dashboard',
+            name: 'dashboard',
             path: '/',
             component: () => import('@/views/dashboard/index.vue')
         },
