@@ -3,6 +3,7 @@ import router from './router';
 import { createApp } from 'vue'
 import vuetify from './plugins/vuetify';
 import '@/scss/style.scss';
+import './plugins/yup';
 
 const app = createApp(App)
 app
