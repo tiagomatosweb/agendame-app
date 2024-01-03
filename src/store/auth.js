@@ -5,6 +5,7 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
   }),
+
   actions: {
     sanctum() {
       return axios.get('sanctum/csrf-cookie')
@@ -13,8 +14,13 @@ export const useAuthStore = defineStore('auth', {
       return axios.post('api/login', {
         email,
         password
+      }).then((response) => {
+        this.user = response.data.data
       })
     }
   },
-  getters: {}
+
+  getters: {
+    isLoggedIn: (state) => !!state?.user?.id
+  }
 });

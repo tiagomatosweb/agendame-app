@@ -50,7 +50,11 @@ const schema = object({
 })
 
 const {handleSubmit, errors, isSubmitting} = useForm({
-  validationSchema: schema
+  validationSchema: schema,
+  initialValues: {
+    email: 'test@example.com',
+    password: 'password'
+  }
 })
 
 const submit = handleSubmit(async (values) => {
