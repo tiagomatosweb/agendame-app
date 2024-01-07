@@ -1,14 +1,14 @@
 <script setup>
-import {useAuthStore} from '@/store/auth';
+import {useMeStore} from "@/store/me";
 
-const authStore = useAuthStore()
+const meStore = useMeStore()
 </script>
 <template>
   <div>
     Dashboard
     <br><br>
-    <pre>{{ authStore.user }}</pre>
+    <pre>{{ meStore.user }}</pre>
     <br>
-    Tá logado jovem? {{ authStore.isLoggedIn }}
+    Tá logado jovem? {{ meStore.isLoggedIn }}
   </div>
 </template>
