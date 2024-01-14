@@ -46,7 +46,10 @@ import {object, string} from 'yup';
 const schema = object({
   first_name: string().required().label('Nome'),
   email: string().required().email().label('E-mail'),
-  password: string().required().label('Senha'),
+  password: string().required().min(8).matches(
+    /^(?=.*[a-zA-Z])(?=.*[0-9])/,
+    'Pelo menos uma letra e um número'
+  ).label('Senha'),
 })
 
 const {handleSubmit, errors} = useForm({
