@@ -73,16 +73,12 @@ function login(values) {
   feedbackMessage.value = ''
 
   authStore
-    .sanctum()
+    .login(values.email, values.password)
     .then(() => {
-      authStore
-        .login(values.email, values.password)
-        .then(() => {
-          router.push({name: 'dashboard'})
-        })
-        .catch(() => {
-          feedbackMessage.value = 'Seu e-mail ou senha estão inválidos.'
-        })
+      router.push({name: 'dashboard'})
+    })
+    .catch(() => {
+      feedbackMessage.value = 'Seu e-mail ou senha estão inválidos.'
     })
 }
 </script>
