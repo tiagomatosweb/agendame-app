@@ -1,4 +1,6 @@
 <template>
+  <v-alert v-if="feedbackMessage" color="error" class="mb-2">{{ feedbackMessage }}</v-alert>
+
   <v-form @submit.prevent="submit">
     <v-row class="d-flex mb-3">
         <v-col cols="12">
@@ -27,11 +29,12 @@
               type="password"
               color="primary" />
         </v-col>
-        <v-col cols="12" >
+        <v-col cols="12">
             <v-btn
               type="submit"
               color="primary"
               size="large"
+              :loading="isSubmitting"
               block
               flat>Cadastrar</v-btn>
         </v-col>
@@ -42,6 +45,8 @@
 <script setup>
 import {useField, useForm} from 'vee-validate';
 import {object, string} from 'yup';
+import {useAuthStore} from '@/store/auth';
+import {ref} from 'vue';
 
 const schema = object({
   first_name: string().required().label('Nome'),
@@ -52,7 +57,7 @@ const schema = object({
   ).label('Senha'),
 })
 
-const {handleSubmit, errors} = useForm({
+const {handleSubmit, errors, isSubmitting} = useForm({
   validationSchema: schema,
   initialValues: {
     first_name: 'Jon',
@@ -61,8 +66,14 @@ const {handleSubmit, errors} = useForm({
   }
 })
 
+const feedbackMessage = ref()
+
 const submit = handleSubmit(async (values) => {
-  console.log(values)
+  const authStore = useAuthStore()
+  await authStore.register(values.first_name, values.email, values.password)
+    .catch(() => {
+      feedbackMessage.value = 'Usuário já existe.'
+    })
 })
 
 const {value: firstName} = useField('first_name')
