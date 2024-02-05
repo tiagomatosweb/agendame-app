@@ -1,6 +1,6 @@
 <script setup>
 import Logo from '@/layouts/full/logo/Logo.vue';
-import RegisterForm from '@/components/auth/RegisterForm.vue';
+import LoginForm from '@/components/auth/LoginForm.vue';
 </script>
 
 <template>
@@ -13,13 +13,25 @@ import RegisterForm from '@/components/auth/RegisterForm.vue';
                             <div class="d-flex justify-center py-4">
                                 <Logo />
                             </div>
-                            <RegisterForm />
-                            <h6 class="text-h6 text-muted font-weight-medium d-flex justify-center align-center mt-3">
-                                Já tem uma conta?
-                                <RouterLink :to="{ name: 'login' }"
-                                    class="text-primary text-decoration-none text-body-1 opacity-1 font-weight-medium pl-2">
-                                    Login</RouterLink>
-                            </h6>
+
+                          <v-alert
+                            color="error"
+                            class="mb-2">
+                            Error
+                          </v-alert>
+
+                          <v-alert
+                            color="success"
+                            class="mb-2">
+                            Success
+                          </v-alert>
+
+                          <div class="text-center">
+                            <v-progress-circular
+                              indeterminate
+                              color="primary"
+                            ></v-progress-circular>
+                          </div>
                         </v-card-item>
                     </v-card>
                 </v-col>

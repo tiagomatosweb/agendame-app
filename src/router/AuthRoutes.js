@@ -23,5 +23,16 @@ export default [
         component: () => import('@/views/auth/Register.vue')
       },
     ]
+  },
+  {
+    path: '/verificar-email',
+    component: () => import('@/layouts/blank/BlankLayout.vue'),
+    children: [
+      {
+        name: 'verifyEmail',
+        path: '',
+        component: () => import('@/views/auth/VerifyEmail.vue')
+      },
+    ]
   }
 ];
