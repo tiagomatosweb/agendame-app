@@ -19,3 +19,11 @@ export const redirectIfAuthenticated = (to, from, next) => {
     next()
   }
 }
+
+export const checkIfTokenExists = (to, from, next) => {
+  if (!to.query?.token) {
+    next({name: 'login'})
+  } else {
+    next();
+  }
+}
