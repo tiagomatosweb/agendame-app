@@ -47,6 +47,7 @@ import {useField, useForm} from 'vee-validate';
 import {object, string} from 'yup';
 import {useAuthStore} from '@/store/auth';
 import {ref} from 'vue';
+import {useRouter} from 'vue-router';
 
 const schema = object({
   first_name: string().required().label('Nome'),
@@ -66,11 +67,16 @@ const {handleSubmit, errors, isSubmitting} = useForm({
   }
 })
 
+const router = useRouter()
 const feedbackMessage = ref()
 
 const submit = handleSubmit(async (values) => {
   const authStore = useAuthStore()
   await authStore.register(values.first_name, values.email, values.password)
+    .then(async () => {
+      await authStore.login(values.email, values.password)
+      router.push({ name: 'dashboard' })
+    })
     .catch(() => {
       feedbackMessage.value = 'Usuário já existe.'
     })
