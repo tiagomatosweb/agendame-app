@@ -44,8 +44,8 @@ const submit = handleSubmit(async (values) => {
     .then(() => {
       emits('after-request')
     })
-    .catch(() => {
-      feedbackMessage.value = 'Usuário não exite!'
+    .catch((e) => {
+      feedbackMessage.value = e.message
     })
 })
 

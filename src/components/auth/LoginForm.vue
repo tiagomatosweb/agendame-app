@@ -80,7 +80,6 @@ function login(values) {
       router.push({name: 'dashboard'})
     })
     .catch((e) => {
-      console.log(e)
       feedbackMessage.value = e.message
     })
 }

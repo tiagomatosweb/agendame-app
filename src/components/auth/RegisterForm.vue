@@ -77,8 +77,8 @@ const submit = handleSubmit(async (values) => {
       await authStore.login(values.email, values.password)
       router.push({ name: 'dashboard' })
     })
-    .catch(() => {
-      feedbackMessage.value = 'Usuário já existe.'
+    .catch((e) => {
+      feedbackMessage.value = e.message
     })
 })
 
