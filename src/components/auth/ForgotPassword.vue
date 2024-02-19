@@ -6,6 +6,7 @@
 
   <ResetPasswordForm
     v-if="state === 'resetPassword'"
+    @after-reset="state = 'reset'"
   />
 
   <v-alert
@@ -13,7 +14,7 @@
     color="success"
     class="mb-2"
   >
-    Sucesso
+    Sua senha foi redefinida com sucesso!
   </v-alert>
 </template>
 

@@ -24,11 +24,13 @@ import {object, string} from 'yup';
 import {ref} from 'vue';
 import {useAuthStore} from '@/store/auth';
 
-const emit = defineEmits(['after-request'])
-
+const emits = defineEmits(['after-request'])
+const feedbackMessage = ref(null)
+const authStore = useAuthStore()
 const schema = object({
   email: string().required().email().label('E-mail')
 })
+
 const {handleSubmit, isSubmitting, errors} = useForm({
   validationSchema: schema,
   initialValues: {
@@ -36,17 +38,16 @@ const {handleSubmit, isSubmitting, errors} = useForm({
   }
 })
 
-const feedbackMessage = ref(null)
-const {value: email} = useField('email')
-
-const authStore = useAuthStore()
 const submit = handleSubmit(async (values) => {
+  feedbackMessage.value = null
   await authStore.forgotPassword(values.email)
     .then(() => {
-      emit('after-request')
+      emits('after-request')
     })
     .catch(() => {
       feedbackMessage.value = 'Usuário não exite!'
     })
 })
+
+const {value: email} = useField('email')
 </script>
