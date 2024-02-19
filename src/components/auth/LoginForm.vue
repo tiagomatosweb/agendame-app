@@ -79,8 +79,10 @@ function login(values) {
     .then(() => {
       router.push({name: 'dashboard'})
     })
-    .catch(() => {
-      feedbackMessage.value = 'Seu e-mail ou senha estão inválidos.'
+    .catch((e) => {
+      if (e.error === 'InvalidAuthenticationException') {
+        feedbackMessage.value = 'Seu e-mail ou senha estão inválidos.'
+      }
     })
 }
 </script>
