@@ -1,5 +1,6 @@
 const messages = {
-  InvalidAuthenticationException: 'Seu e-mail ou senha estão inválidos.'
+  ServerErrorException: 'Alguma coisa saiu errado!',
+  InvalidAuthenticationException: 'Seu e-mail e/ou senha estão inválidos.',
 }
 
-export const errorMessage = (code) => messages[code]
+export const errorMessage = (code = 'ServerErrorException') => messages[code]

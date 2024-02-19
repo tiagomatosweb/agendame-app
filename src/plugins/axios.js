@@ -9,10 +9,10 @@ axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   const response = error.response
-  const e = errorMessage(response.data.error)
+  const message = errorMessage(response.data.error)
 
   return Promise.reject({
-    message: e,
+    message,
     status: response.status
   });
 });
