@@ -9,13 +9,23 @@
     @after-reset="state = 'reset'"
   />
 
-  <v-alert
-    v-if="state === 'reset'"
-    color="success"
-    class="mb-2"
-  >
-    Sua senha foi redefinida com sucesso!
-  </v-alert>
+  <template v-if="state === 'reset'">
+    <v-alert
+      color="success"
+      class="mb-2"
+    >
+      Sua senha foi redefinida com sucesso!
+    </v-alert>
+
+    <div class="text-center mt-5">
+      <RouterLink
+        :to="{ name: 'login'}"
+        class="text-primary text-decoration-none text-body-1 opacity-1 font-weight-medium"
+      >
+        Login
+      </RouterLink>
+    </div>
+  </template>
 </template>
 
 <script setup>
