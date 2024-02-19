@@ -1,6 +1,7 @@
 <template>
   <ForgotPasswordForm
     v-if="state === 'forgotPassword'"
+    @after-request="state = 'resetPassword'"
   />
 
   <ResetPasswordForm
