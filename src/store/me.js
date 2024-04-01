@@ -13,12 +13,17 @@ export const useMeStore = defineStore('me', {
       return axios.get('api/me')
         .then((response) => {
           this.user = response.data.data
-          this.saveTeamToLocalStorage()
+
+          if (!this.currentTeamToken) {
+            this.changeTeam(this.defaultTeam.token)
+          }
         })
     },
 
-    saveTeamToLocalStorage() {
-      this.currentTeamToken = this.defaultTeam.token
+    changeTeam(teamToken) {
+      if (this.user.teams.some(o => o.token === teamToken)) {
+        this.currentTeamToken = teamToken
+      }
     }
   },
 
