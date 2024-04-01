@@ -14,10 +14,14 @@ export const useMeStore = defineStore('me', {
         .then((response) => {
           this.user = response.data.data
 
-          if (!this.currentTeamToken) {
-            this.changeTeam(this.defaultTeam.token)
-          }
+          this.setDefaultTeam();
         })
+    },
+
+    setDefaultTeam() {
+      if (!this.user.teams.some(o => o.token === this.currentTeamToken)) {
+        this.changeTeam(this.defaultTeam.token)
+      }
     },
 
     changeTeam(teamToken) {

@@ -9,8 +9,9 @@
             <v-list-item
               v-for="team in meStore.user.teams"
               :key="team.token"
+              @click="changeTeam(team)"
             >
-              <v-list-item-title @click="changeTeam(team)">{{ team.name }}</v-list-item-title>
+              <v-list-item-title>{{ team.name }}</v-list-item-title>
             </v-list-item>
           </v-list>
 
@@ -34,6 +35,6 @@ import {useMeStore} from '@/store/me';
 const meStore = useMeStore()
 
 function changeTeam(team) {
-  meStore.currentTeamToken = team.token
+  meStore.changeTeam(team.token)
 }
 </script>

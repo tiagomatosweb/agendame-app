@@ -17,10 +17,7 @@ export const useAuthStore = defineStore('auth', {
       }).then((response) => {
         const meStore = useMeStore();
         meStore.user = response.data.data
-
-        if (!meStore.currentTeamToken) {
-          this.changeTeam(meStore.defaultTeam.token)
-        }
+        meStore.setDefaultTeam()
       })
     },
     register(firstName, email, password) {
