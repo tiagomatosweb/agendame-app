@@ -6,10 +6,11 @@ import NavItem from './vertical-sidebar/NavItem/index.vue';
 import ExtraBox from './vertical-sidebar/extrabox/ExtraBox.vue';
 import Logo from './logo/Logo.vue';
 // Icon Imports
-import {Menu2Icon, BellRingingIcon} from 'vue-tabler-icons';
+import {Menu2Icon, BellRingingIcon, SelectorIcon} from 'vue-tabler-icons';
 // dropdown imports
 import NotificationDD from './vertical-header/NotificationDD.vue';
 import ProfileDD from './vertical-header/ProfileDD.vue';
+import TeamMenu from '@/layouts/full/team-menu/TeamMenu.vue';
 
 const sidebarMenu = shallowRef(sidebarItems);
 const sDrawer = ref(true);
@@ -22,6 +23,36 @@ const sDrawer = ref(true);
     <div class="pa-5">
       <Logo/>
     </div>
+
+    <TeamMenu />
+
+<!--    <div class="text-center">-->
+<!--      <v-btn color="primary" variant="outlined">-->
+<!--        Time atual <SelectorIcon size="20" stroke-width="1.5" class="ml-2"/>-->
+
+<!--        <v-menu activator="parent">-->
+<!--          <v-card min-width="250">-->
+<!--            <v-list>-->
+<!--              <v-list-item>-->
+<!--                <v-list-item-title>Team 1</v-list-item-title>-->
+<!--              </v-list-item>-->
+<!--              <v-list-item>-->
+<!--                <v-list-item-title>Team 2</v-list-item-title>-->
+<!--              </v-list-item>-->
+<!--            </v-list>-->
+
+<!--            <v-divider class="border-opacity-100" />-->
+
+<!--            <v-list>-->
+<!--              <v-list-item>-->
+<!--                <v-btn variant="flat" color="primary" block="">Novo time</v-btn>-->
+<!--              </v-list-item>-->
+<!--            </v-list>-->
+<!--          </v-card>-->
+<!--        </v-menu>-->
+<!--      </v-btn>-->
+<!--    </div>-->
+
     <!-- ---------------------------------------------- -->
     <!---Navigation -->
     <!-- ---------------------------------------------- -->

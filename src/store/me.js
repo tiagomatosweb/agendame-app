@@ -5,6 +5,7 @@ import {useStorage} from '@vueuse/core';
 export const useMeStore = defineStore('me', {
   state: () => ({
     user: null,
+    currentTeamToken: useStorage('team_id', ''),
   }),
 
   actions: {
@@ -17,12 +18,13 @@ export const useMeStore = defineStore('me', {
     },
 
     saveTeamToLocalStorage() {
-      useStorage('team_id', this.defaultTeam.token)
+      this.currentTeamToken = this.defaultTeam.token
     }
   },
 
   getters: {
     isLoggedIn: (state) => !!state?.user?.id,
-    defaultTeam: (state) => state?.user?.teams.find(o => o.default)
+    defaultTeam: (state) => state?.user?.teams.find(o => o.default),
+    currentTeam: (state) => state?.user?.teams.find(o => o.token === state.currentTeamToken)
   }
 })
