@@ -1,0 +1,214 @@
+<template>
+  <div>
+    <div class="mb-5 pb-5 border-b border-opacity-100">
+      <v-row>
+        <v-col>
+          <h1 class="text-h3">Meus times</h1>
+        </v-col>
+
+        <v-col class="text-right">
+          <v-dialog width="auto">
+            <template #activator="{ props: activatorProps }">
+              <v-btn
+                flat
+                color="primary"
+                v-bind="activatorProps">Novo time</v-btn>
+            </template>
+
+            <template #default="{ isActive }">
+              <v-card width="400">
+                <v-card-title>Adicionar time</v-card-title>
+
+                <v-card-text>
+                  <v-form>
+                    <v-text-field
+                      label="Nome"
+                      variant="outlined"
+                      color="primary"
+                    />
+                  </v-form>
+                </v-card-text>
+
+                <template #actions>
+                  <v-btn
+                    color="primary"
+                    flat
+                    class="ms-auto"
+                    text="Adicionar"
+                    @click="isActive.value = false"
+                  ></v-btn>
+                </template>
+              </v-card>
+            </template>
+          </v-dialog>
+        </v-col>
+      </v-row>
+    </div>
+
+    <v-table class="border-opacity-100">
+      <thead>
+      <tr>
+        <th class="text-left">
+          Time
+        </th>
+
+        <th class="text-left">
+          Cargo
+        </th>
+
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr
+        v-for="item in teams"
+        :key="item.name"
+      >
+        <td>
+          {{ item.name }}
+          <v-chip
+            v-if="item.default"
+            size="small"
+            variant="tonal"
+            color="primary"
+            class="ml-2"
+          >
+            Default
+          </v-chip>
+        </td>
+
+        <td>
+          <v-chip
+            size="small"
+            variant="tonal"
+          >
+            {{ item.role }}
+          </v-chip>
+        </td>
+
+        <td class="text-right">
+          <v-menu>
+            <template #activator="{ props }">
+              <v-btn
+                flat
+                icon
+                size="small"
+                class="text-muted"
+                v-bind="props"
+              >
+                <DotsVerticalIcon size="20" />
+              </v-btn>
+            </template>
+
+            <v-list>
+              <v-list-item
+                @click="dialogEdit = true"
+              >
+                <template #prepend>
+                  <EditIcon stroke-width="1.5" size="20"/>
+                </template>
+
+                <v-list-item-title
+                  class="pl-2 text-body-1"
+                >
+                  Editar
+                </v-list-item-title>
+              </v-list-item>
+
+              <v-list-item
+                @click="dialogDelete = true"
+              >
+                <template #prepend>
+                  <TrashIcon stroke-width="1.5" size="20"/>
+                </template>
+
+                <v-list-item-title
+                  class="pl-2 text-body-1"
+                >
+                  Deletar
+                </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </td>
+      </tr>
+      </tbody>
+    </v-table>
+
+    <v-dialog
+      v-model="dialogEdit"
+      width="auto"
+    >
+      <v-card width="400">
+        <v-card-title>Editar time</v-card-title>
+
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              label="Nome"
+              variant="outlined"
+              color="primary"
+            />
+          </v-form>
+        </v-card-text>
+
+        <template #actions>
+          <v-btn
+            color="primary"
+            flat
+            class="ms-auto"
+            text="Editar"
+            @click="dialog = false"
+          ></v-btn>
+        </template>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog
+      v-model="dialogDelete"
+      width="auto"
+    >
+      <v-card
+        :prepend-icon="TrashIcon"
+        title="Você tem certeza que deseja deletar este time?"
+      >
+        <template #actions>
+          <v-spacer></v-spacer>
+
+          <v-btn @click="dialogDelete = false">
+            Cancelar
+          </v-btn>
+
+          <v-btn
+            @click="dialogDelete = false"
+            variant="tonal"
+            color="error"
+          >
+            Deletar
+          </v-btn>
+        </template>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+<script setup>
+import {ref} from 'vue';
+import {DotsVerticalIcon, EditIcon, TrashIcon} from 'vue-tabler-icons'
+
+const dialogEdit = ref(false)
+const dialogDelete = ref(false)
+const teams = [
+  {
+    name: 'Team 1',
+    role: 'admin',
+    default: true,
+  },
+  {
+    name: 'Team 2',
+    role: 'atendente',
+    default: false,
+  },
+]
+</script>

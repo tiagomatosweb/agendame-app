@@ -10,5 +10,10 @@ export default {
       path: '/',
       component: () => import('@/views/dashboard/index.vue')
     },
+    {
+      name: 'teams',
+      path: '/times',
+      component: () => import('@/views/teams/index.vue')
+    },
   ]
 };
