@@ -4,7 +4,8 @@ import axios from 'axios';
 export const useTeamsStore = defineStore('teams', {
   state: () => ({
     teams: [],
-    toEdit: {}
+    toEdit: {},
+    toDelete: {},
   }),
 
   actions: {
@@ -23,8 +24,16 @@ export const useTeamsStore = defineStore('teams', {
       const team = await axios.put(`api/teams/${teamToken}`, payload)
         .then(r => r.data.data)
 
-      const idx = this.teams.findIndex(o => o.token === team.token)
+      const idx = this.teams.findIndex(o => o.token === teamToken)
       this.teams.splice(idx, 1, team)
+    },
+
+    async deleteTeam(teamToken) {
+      await axios.delete(`api/teams/${teamToken}`)
+        .then(r => r.data.data)
+
+      const idx = this.teams.findIndex(o => o.token === teamToken)
+      this.teams.splice(idx, 1)
     }
   }
 })

@@ -71,7 +71,7 @@
             </v-list-item>
 
             <v-list-item
-              @click="dialogDelete = true"
+              @click="toDelete = team"
             >
               <template #prepend>
                 <TrashIcon stroke-width="1.5" size="20"/>
@@ -97,5 +97,5 @@ import {useTeamsStore} from '@/store/teams';
 import {storeToRefs} from 'pinia';
 
 const teamsStore = useTeamsStore()
-const {teams, toEdit} = storeToRefs(teamsStore)
+const {teams, toEdit, toDelete} = storeToRefs(teamsStore)
 </script>

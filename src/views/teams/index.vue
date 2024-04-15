@@ -63,29 +63,32 @@
       </v-dialog>
 
       <v-dialog
-        v-model="dialogDelete"
+        v-model="isDeleting"
         width="auto"
       >
-        <v-card
-          :prepend-icon="TrashIcon"
-          title="Você tem certeza que deseja deletar este time?"
-        >
-          <template #actions>
-            <v-spacer></v-spacer>
+        <template #default="{ isActive }">
+          <v-card
+            :prepend-icon="TrashIcon"
+            title="Você tem certeza que deseja deletar este time?"
+          >
+            <template #actions>
+              <v-spacer></v-spacer>
 
-            <v-btn @click="dialogDelete = false">
-              Cancelar
-            </v-btn>
+              <v-btn @click="isActive.value = false">
+                Cancelar
+              </v-btn>
 
-            <v-btn
-              @click="dialogDelete = false"
-              variant="tonal"
-              color="error"
-            >
-              Deletar
-            </v-btn>
-          </template>
-        </v-card>
+              <v-btn
+                @click="deleteTeam(toDelete)"
+                variant="tonal"
+                color="error"
+                :loading="deleting"
+              >
+                Deletar
+              </v-btn>
+            </template>
+          </v-card>
+        </template>
       </v-dialog>
     </template>
   </div>
@@ -102,7 +105,7 @@ import {storeToRefs} from 'pinia';
 import TeamEditForm from '@/components/Teams/TeamEditForm.vue';
 
 const teamsStore = useTeamsStore();
-const {toEdit} = storeToRefs(teamsStore)
+const {toEdit, toDelete} = storeToRefs(teamsStore)
 
 const {isLoading} = useAsyncState(
   teamsStore.getTeams(),
@@ -118,5 +121,23 @@ const isEditing = computed({
     }
   },
 })
-const dialogDelete = ref(false)
+
+const isDeleting = computed({
+  get() {
+    return !!Object.keys(toDelete.value).length
+  },
+  set(value) {
+    if (!value) {
+      toDelete.value = {}
+    }
+  },
+})
+
+const deleting = ref(false)
+async function deleteTeam(team) {
+  deleting.value = true
+  await teamsStore.deleteTeam(team.token)
+  toDelete.value = {}
+  deleting.value = false
+}
 </script>
