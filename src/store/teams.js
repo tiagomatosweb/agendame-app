@@ -8,7 +8,14 @@ export const useTeamsStore = defineStore('teams', {
 
   actions: {
     async getTeams() {
-      this.teams = await axios.get('api/teams').then(r => r.data.data)
+      this.teams = await axios.get('api/teams')
+        .then(r => r.data.data)
+    },
+
+    async storeTeam(payload) {
+      const team = await axios.post('api/teams', payload)
+        .then(r => r.data.data)
+      this.teams.push(team)
     }
   }
 })

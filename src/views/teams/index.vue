@@ -20,24 +20,11 @@
                 <v-card-title>Adicionar time</v-card-title>
 
                 <v-card-text>
-                  <v-form>
-                    <v-text-field
-                      label="Nome"
-                      variant="outlined"
-                      color="primary"
-                    />
-                  </v-form>
+                  <TeamAddForm
+                    @add="isActive.value = false"
+                    @cancel="isActive.value = false"
+                  />
                 </v-card-text>
-
-                <template #actions>
-                  <v-btn
-                    color="primary"
-                    flat
-                    class="ms-auto"
-                    text="Adicionar"
-                    @click="isActive.value = false"
-                  ></v-btn>
-                </template>
               </v-card>
             </template>
           </v-dialog>
@@ -119,6 +106,7 @@ import {TrashIcon} from 'vue-tabler-icons'
 import {useTeamsStore} from '@/store/teams';
 import {useAsyncState} from '@vueuse/core';
 import TeamsTable from '@/components/Teams/TeamsTable.vue';
+import TeamAddForm from '@/components/Teams/TeamAddForm.vue';
 
 const teamsStore = useTeamsStore();
 
