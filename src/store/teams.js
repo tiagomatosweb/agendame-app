@@ -3,7 +3,8 @@ import axios from 'axios';
 
 export const useTeamsStore = defineStore('teams', {
   state: () => ({
-    teams: []
+    teams: [],
+    toEdit: {}
   }),
 
   actions: {

@@ -31,7 +31,9 @@
         </v-col>
       </v-row>
     </div>
-
+    <pre>
+      {{!!Object.keys(toEdit).length}}
+    </pre>
     <v-progress-circular
       v-if="isLoading"
       :width="3"
@@ -43,7 +45,7 @@
       <TeamsTable />
 
       <v-dialog
-        v-model="dialogEdit"
+        v-model="isEditing"
         width="auto"
       >
         <v-card width="400">
@@ -101,19 +103,30 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {computed, ref} from 'vue';
 import {TrashIcon} from 'vue-tabler-icons'
 import {useTeamsStore} from '@/store/teams';
 import {useAsyncState} from '@vueuse/core';
 import TeamsTable from '@/components/Teams/TeamsTable.vue';
 import TeamAddForm from '@/components/Teams/TeamAddForm.vue';
+import {storeToRefs} from 'pinia';
 
 const teamsStore = useTeamsStore();
+const {toEdit} = storeToRefs(teamsStore)
 
 const { isLoading } = useAsyncState(
   teamsStore.getTeams()
 )
 
-const dialogEdit = ref(false)
+const isEditing = computed({
+  get() {
+    return !!Object.keys(toEdit.value).length
+  },
+  set(value) {
+    if (!value) {
+      toEdit.value = {}
+    }
+  }
+})
 const dialogDelete = ref(false)
 </script>

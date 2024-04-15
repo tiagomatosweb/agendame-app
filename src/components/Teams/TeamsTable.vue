@@ -16,13 +16,13 @@
 
     <tbody>
     <tr
-      v-for="item in teams"
-      :key="item.name"
+      v-for="team in teams"
+      :key="team.name"
     >
       <td>
-        {{ item.name }}
+        {{ team.name }}
         <v-chip
-          v-if="item.default"
+          v-if="team.default"
           size="small"
           variant="tonal"
           color="primary"
@@ -37,7 +37,7 @@
           size="small"
           variant="tonal"
         >
-          {{ item.role }}
+          {{ team.role }}
         </v-chip>
       </td>
 
@@ -57,7 +57,7 @@
 
           <v-list>
             <v-list-item
-              @click="dialogEdit = true"
+              @click="toEdit = team"
             >
               <template #prepend>
                 <EditIcon stroke-width="1.5" size="20"/>
@@ -97,5 +97,5 @@ import {useTeamsStore} from '@/store/teams';
 import {storeToRefs} from 'pinia';
 
 const teamsStore = useTeamsStore()
-const {teams} = storeToRefs(teamsStore)
+const {teams, toEdit} = storeToRefs(teamsStore)
 </script>
