@@ -34,10 +34,12 @@
 
       <td>
         <v-chip
+          v-for="role in team.roles"
+          :key="`${team.token}_${role.name}`"
           size="small"
           variant="tonal"
         >
-          {{ team.role }}
+          {{ role.name }}
         </v-chip>
       </td>
 
