@@ -18,6 +18,7 @@
           <div class="d-flex items-center justify-center">
             <v-label class="text-subtitle-1 ma-none">Mensal</v-label>
             <v-switch
+              v-model="frequency"
               color="primary"
               true-value="yearly"
               false-value="monthly"
@@ -42,9 +43,9 @@
 
             <div class="d-flex align-center mt-4">
               <sup class="text-h6 mt-n3 pr-2">R$</sup>
-              <h2 class="display-1">R$ {{plan.price_monthly}}</h2>
+              <h2 class="display-1">{{isMonthly ? plan.price_monthly : plan.price_yearly}}</h2>
               <span class="text-medium-emphasis font-weight-medium mt-4 ml-2">
-                  /mês
+                {{isMonthly ? '/mês' : '/ano'}}
                 </span>
             </div>
 
@@ -63,10 +64,14 @@
 <script setup>
 import {useAsyncState} from '@vueuse/core';
 import axios from 'axios';
+import {computed, ref} from 'vue';
 
 const {isLoading, state: plans} = useAsyncState(
   axios.get('api/plans').then(r => r.data.data)
 )
+
+const frequency = ref('monthly')
+const isMonthly = computed(() => frequency.value === 'monthly')
 </script>
 
 <style scoped>
