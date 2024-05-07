@@ -34,7 +34,7 @@
         <v-col
           v-for="plan in plans"
           :key="plan.id"
-          cols="4"
+          cols="6"
         >
           <v-card elevation="10" border class="pa-sm-8 pa-4">
             <div class="d-flex justify-space-between">
@@ -42,11 +42,19 @@
             </div>
 
             <div class="d-flex align-center mt-4">
-              <sup class="text-h6 mt-n3 pr-2">R$</sup>
-              <h2 class="display-1">{{isMonthly ? plan.price_monthly : plan.price_yearly}}</h2>
-              <span class="text-medium-emphasis font-weight-medium mt-4 ml-2">
-                {{isMonthly ? '/mês' : '/ano'}}
-                </span>
+              <h2
+                v-if="plan.name === 'Freemium'"
+                class="display-3">
+                Gratuito para sempre! :)
+              </h2>
+
+              <template v-else>
+                <sup class="text-h6 mt-n3 pr-2">R$</sup>
+                <h2 class="display-1">{{isMonthly ? plan.price_monthly : plan.price_yearly}}</h2>
+                <span class="text-medium-emphasis font-weight-medium mt-4 ml-2">
+                  {{isMonthly ? '/mês' : '/ano'}}
+                  </span>
+              </template>
             </div>
 
             <div class="description pt-5 pb-2">
