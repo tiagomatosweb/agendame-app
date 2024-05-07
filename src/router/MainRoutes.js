@@ -15,5 +15,10 @@ export default {
       path: '/times',
       component: () => import('@/views/teams/index.vue')
     },
+    {
+      name: 'plans',
+      path: '/planos',
+      component: () => import('@/views/plans/index.vue')
+    },
   ]
 };

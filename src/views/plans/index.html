@@ -1,0 +1,110 @@
+<template>
+  <v-container>
+    <h2 class="text-h2 text-center pt-10">Planos flexíveis</h2>
+
+    <div class="pa-5 text-center">
+      <v-progress-circular
+        indeterminate
+        color="primary"
+      />
+    </div>
+
+    <v-row justify="center" class="mt-1 mb-sm-10 mb-5">
+      <v-col cols="auto">
+        <div class="d-flex items-center justify-center">
+          <v-label class="text-subtitle-1 ma-none">Mensal</v-label>
+          <v-switch
+            color="primary"
+            true-value="yearly"
+            false-value="monthly"
+            class="mx-4"
+            hide-details
+          />
+          <v-label class="text-subtitle-1">Anual</v-label>
+        </div>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="4">
+        <v-card elevation="10" border class="pa-sm-8 pa-4">
+          <div class="d-flex justify-space-between">
+            <h4 class="text-body-2 text-medium-emphasis text-uppercase">Freemium</h4>
+          </div>
+
+          <div class="d-flex align-center mt-4">
+            <sup class="text-h6 mt-n3 pr-2">R$</sup>
+            <h2 class="display-1">R$9,90</h2>
+            <span class="text-medium-emphasis font-weight-medium mt-4 ml-2">
+                /mês
+              </span>
+          </div>
+
+          <div class="description pt-5 pb-2">
+            Descrição do plano
+          </div>
+
+          <v-btn block flat color="primary" size="large">Selecione</v-btn>
+        </v-card>
+      </v-col>
+
+      <v-col cols="4">
+        <v-card elevation="10" border class="pa-sm-8 pa-4">
+          <div class="d-flex justify-space-between">
+            <h4 class="text-body-2 text-medium-emphasis text-uppercase">Freemium</h4>
+          </div>
+
+          <div class="d-flex align-center mt-4">
+            <sup class="text-h6 mt-n3 pr-2">R$</sup>
+            <h2 class="display-1">R$9,90</h2>
+            <span class="text-medium-emphasis font-weight-medium mt-4 ml-2">
+                /mês
+              </span>
+          </div>
+
+          <div class="description pt-5 pb-2">
+            Descrição do plano
+          </div>
+
+          <v-btn block flat color="primary" size="large">Selecione</v-btn>
+        </v-card>
+      </v-col>
+
+      <v-col cols="4">
+        <v-card elevation="10" border class="pa-sm-8 pa-4">
+          <div class="d-flex justify-space-between">
+            <h4 class="text-body-2 text-medium-emphasis text-uppercase">Freemium</h4>
+          </div>
+
+          <div class="d-flex align-center mt-4">
+            <sup class="text-h6 mt-n3 pr-2">R$</sup>
+            <h2 class="display-1">R$9,90</h2>
+            <span class="text-medium-emphasis font-weight-medium mt-4 ml-2">
+                /mês
+              </span>
+          </div>
+
+          <div class="description pt-5 pb-2">
+            Descrição do plano
+          </div>
+
+          <v-btn block flat color="primary" size="large">Selecione</v-btn>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script setup>
+</script>
+
+<style scoped>
+.description {
+  font-size: 14px;
+}
+
+.description ul {
+  list-style: none;
+  font-weight: 500;
+}
+</style>
