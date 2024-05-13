@@ -14,6 +14,17 @@ export default [
     ],
   },
   {
+    path: '/logout',
+    component: () => import('@/layouts/blank/BlankLayout.vue'),
+    children: [
+      {
+        name: 'logout',
+        path: '',
+        component: () => import('@/views/auth/Logout.vue'),
+      },
+    ],
+  },
+  {
     path: '/esqueci-senha',
     component: () => import('@/layouts/blank/BlankLayout.vue'),
     children: [

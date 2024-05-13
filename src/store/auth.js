@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios'
 import {useMeStore} from '@/store/me';
-import {useStorage} from '@vueuse/core/index';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({}),
@@ -19,6 +18,13 @@ export const useAuthStore = defineStore('auth', {
         meStore.user = response.data.data
         meStore.setDefaultTeam()
       })
+    },
+    logout() {
+      return axios.post('api/logout')
+        .then(() => {
+          const meStore = useMeStore();
+          meStore.$reset()
+        })
     },
     register(firstName, email, password) {
       return axios.post('api/register', {
