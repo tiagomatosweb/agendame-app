@@ -20,5 +20,15 @@ export default {
       path: '/planos',
       component: () => import('@/views/plans/index.vue')
     },
+    {
+      name: 'agenda',
+      path: '/agenda',
+      component: () => import('@/views/agenda/index.vue')
+    },
+    {
+      name: 'clients',
+      path: '/clientes',
+      component: () => import('@/views/clients/index.vue')
+    },
   ]
 };
