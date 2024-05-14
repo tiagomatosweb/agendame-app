@@ -19,7 +19,12 @@
 
           <v-list>
             <v-list-item>
-              <v-btn variant="flat" color="primary" block="">Novo time</v-btn>
+              <v-btn
+                :to="{ name: 'teams' }"
+                variant="outlined"
+                color="primary"
+                block
+              >Gerenciar times</v-btn>
             </v-list-item>
           </v-list>
         </v-card>

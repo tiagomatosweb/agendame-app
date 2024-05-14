@@ -7,8 +7,7 @@ import ExtraBox from './vertical-sidebar/extrabox/ExtraBox.vue';
 import Logo from './logo/Logo.vue';
 // Icon Imports
 import {Menu2Icon, BellRingingIcon, SelectorIcon} from 'vue-tabler-icons';
-// dropdown imports
-import NotificationDD from './vertical-header/NotificationDD.vue';
+// import NotificationDD from './vertical-header/NotificationDD.vue';
 import ProfileDD from './vertical-header/ProfileDD.vue';
 import TeamMenu from '@/layouts/full/team-menu/TeamMenu.vue';
 
@@ -83,14 +82,9 @@ const sDrawer = ref(true);
           <Menu2Icon size="20" stroke-width="1.5"/>
         </v-btn>
         <!-- Notification -->
-        <NotificationDD/>
+<!--        <NotificationDD/>-->
       </div>
       <div>
-        <!-- Upgrade button -->
-        <v-btn class="mr-2 bg-primary" href="https://adminmart.com/templates/vuejs/?product_sortby=free"
-               target="_blank">Download Free
-        </v-btn>
-        <!-- User Profile -->
         <ProfileDD/>
       </div>
     </div>
